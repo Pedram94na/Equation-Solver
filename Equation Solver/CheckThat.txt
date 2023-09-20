@@ -1,0 +1,56 @@
+
+Download:
+    https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.9.2/junit-platform-console-standalone-1.9.2.jar
+
+(Rename: junit-platform-console-standalone-1.9.2.jar --> junit5all.jar)
+
+Compile & run functional test:
+    javac -cp .;junit5all.jar;checkthat.jar linear\GaussianEliminationTest.java
+    java -jar junit5all.jar --disable-banner --disable-ansi-colors -cp . -cp checkthat.jar -c linear.GaussianEliminationTest
+
+Compile & run structural test:
+    javac linear\algebra\GaussianElimination.java
+    javac -cp .;junit5all.jar;checkthat.jar linear\GaussianEliminationStructureTest.java
+    java -jar junit5all.jar --disable-banner --disable-ansi-colors -cp . -cp checkthat.jar -c linear.GaussianEliminationStructureTest
+
+Compile & run test suite (needs Java 17+):
+    javac -cp .;junit5all.jar;checkthat.jar linear\GaussianEliminationTestSuite.java
+    java -jar junit5all.jar --disable-banner --disable-ansi-colors -cp . -cp checkthat.jar -c linear.GaussianEliminationTestSuite
+
+Operating systems, consoles:
+    Windows, cmd:        use ; and needs no quotes : javac -cp .;junit5all.jar;checkthat.jar .......
+    Linux, Mac:          use : and needs no quotes : javac -cp .:junit5all.jar:checkthat.jar .......
+    Windows, PowerShell:
+        This is the default in VS Codium, unfortunately.
+        Recommended: use cmd instead. Use the dropdown beside the + to the right to change.
+        If you want to use it anyway: use ; and quotes like this:
+            javac -cp ".;junit5all.jar;checkthat.jar" .......
+
+    ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; : ; :
+
+
+Expected output:
+
+.
++-- JUnit Jupiter [OK]
++-- JUnit Vintage [OK]
+'-- JUnit Platform Suite [OK]
+  '-- TimeTestSuite [OK]
+    '-- JUnit Jupiter [OK]
+      +-- TimeStructureTest [OK]
+      | +-- constructor() [OK]
+      | +-- fieldMin() [OK]
+      | +-- fieldHour() [OK]
+      | '-- methodGetEarlier() [OK]
+      '-- TimeTest [OK]
+        +-- testGetHour() [OK]
+        +-- testGetMin() [OK]
+        +-- testSetHour() [OK]
+        +-- testSetMin() [OK]
+        '-- testEarlier(int, int, int, int, int, int) [OK]
+          +-- [1] 01, 02, 01, 02, 12, 34 [OK]
+          +-- [2] 01, 59, 01, 59, 12, 34 [OK]
+          '-- [3] 12, 34, 23, 59, 12, 34 [OK]
+
+[        11 tests found           ]
+[        11 tests successful      ]
